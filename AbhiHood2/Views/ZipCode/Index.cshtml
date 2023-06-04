@@ -1,0 +1,45 @@
+﻿@model IEnumerable<AbhiHood2.Models.UserZipCodeSubscription>
+
+@{
+    Layout = "~/Views/Shared/_LayoutNew.cshtml";
+    ViewData["Title"] = "Index";
+}
+
+<div class="section-title">
+    <h2>Your Zip code</h2>
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    </p>
+</div>
+<div class="row content">
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ZipCode)
+                    </th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ZipCode)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+

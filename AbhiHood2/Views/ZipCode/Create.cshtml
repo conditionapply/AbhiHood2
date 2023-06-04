@@ -1,0 +1,36 @@
+﻿@model AbhiHood2.Models.UserZipCodeSubscription
+
+@{
+    Layout = "~/Views/Shared/_LayoutNew.cshtml";
+    ViewData["Title"] = "Add zip code";
+}
+
+<div class="section-title">
+    <h2>Create</h2>
+    
+</div>
+<div class="row content">
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group d-none">
+                    <label asp-for="UserId" class="control-label"></label>
+                    <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ZipCode" class="control-label"></label>
+                    <input asp-for="ZipCode" class="form-control" />
+                    <span asp-validation-for="ZipCode" class="text-danger"></span>
+                </div>
+                <div class="form-group p-2">
+                    <input type="submit" value="Create" class="btn btn-primary" /> | <a asp-action="Index" class="btn btn-primary">Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
