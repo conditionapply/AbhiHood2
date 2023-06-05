@@ -30,10 +30,19 @@ namespace AbhiHood2.Controllers
         public async Task<IActionResult> Index()
         {
             SetUser();
+            var userId = this.HttpContext.User.GetLoggedInUserId<string>();
+            var zipCode = _context.UserZipCodeSubscription
+                .Where(x => x.UserId == userId)
+                .Select(x=>x.ZipCode).ToArray();
+
+            var myPost = _context.PostedUserData.Where(x => x.UserId == userId).ToList();
+            var allOtherPost= _context.PostedUserData.Where(x => zipCode.Contains(x.ZipCode) && x.UserId != userId).ToList();
+            myPost.AddRange(allOtherPost);
+            return View(myPost);
             //var testItems= _context.PostedUserData.Where(x=> x.ZipCode==)
-              return _context.PostedUserData != null ? 
-                          View(await _context.PostedUserData.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.PostedUserData'  is null.");
+            //return _context.PostedUserData?.Where(x => zipCode.Contains(x.ZipCode)) != null ? 
+            //              View(myPost) :
+            //              Problem("Entity set 'ApplicationDbContext.PostedUserData'  is null.");
         }
 
         // GET: Post/Details/5

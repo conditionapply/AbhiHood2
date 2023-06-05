@@ -32,7 +32,7 @@ namespace AbhiHood1.Controllers
         // GET: Subscriptions
         public async Task<IActionResult> Index()
         {
-            var sqkDbAbhiHoodContext = _context.UserZipCodeSubscription;
+            var sqkDbAbhiHoodContext = _context.UserZipCodeSubscription.Where(x=>x.UserId== this.HttpContext.User.GetLoggedInUserId<string>());
             return View(await sqkDbAbhiHoodContext.ToListAsync());
         }
 
